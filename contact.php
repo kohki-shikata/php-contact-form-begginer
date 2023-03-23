@@ -1,8 +1,25 @@
 <?php
 
-// 絶対に本番環境でこのまま利用しないこと！
-// ローカル環境で検証するか、検証が終わったらサーバーから削除すること！
-// セキュリティ対策は一切行っていません！
+session_start();
+// ワンタイムトークンの一致を確認
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+  // トークンが一致しなかった場合
+  die('お問い合わせの送信に失敗しました');
+}
+
+// 必須項目の確認
+if(empty($_POST['name'])) {
+  $_SESSION['flush']['name'] = 'お名前は必須項目です';
+}
+
+if(empty($_POST['name'])) {
+  $_SESSION['flush']['email'] = 'メールアドレスは必須項目です';
+}
+
+// nameまたはemailのどちらかが入力されていなければ、index.phpへリダイレクト
+if(empty($_POST['name']) || empty($_POST['name'])) {
+  header('Location: /index.php');
+}
 
 mb_language("Japanese");
 //↑マルチバイトの言語設定を日本語にします
