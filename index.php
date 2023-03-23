@@ -34,6 +34,7 @@ $_SESSION['csrf_token'] = $csrf_token;
             <label for="message">お問い合わせ本文</label>
             <textarea id="message" name="message"></textarea>
         </div>
+        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>" />
         <button type="submit">送信</button>
     </form>
 </body>
