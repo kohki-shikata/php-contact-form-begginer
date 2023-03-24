@@ -9,16 +9,17 @@ if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_tok
 
 // 必須項目の確認
 if(empty($_POST['name'])) {
-  $_SESSION['flush']['name'] = 'お名前は必須項目です';
+  $_SESSION['flash']['name'] = 'お名前は必須項目です';
 }
 
-if(empty($_POST['name'])) {
-  $_SESSION['flush']['email'] = 'メールアドレスは必須項目です';
+if(empty($_POST['email'])) {
+  $_SESSION['flash']['email'] = 'メールアドレスは必須項目です';
 }
 
 // nameまたはemailのどちらかが入力されていなければ、index.phpへリダイレクト
-if(empty($_POST['name']) || empty($_POST['name'])) {
+if(empty($_POST['name']) || empty($_POST['email'])) {
   header('Location: /index.php');
+  exit;
 }
 
 mb_language("Japanese");

@@ -2,9 +2,9 @@
 // セッションの利用を開始
 session_start();
 
-// セッションのflushメッセージをクリア
-$flush = isset($_SESSION['flush']) ? $_SESSION['flush'] : [];
-unset($_SESSION['flush']);
+// セッションのflashメッセージをクリア
+$flash = isset($_SESSION['flash']) ? $_SESSION['flash'] : [];
+unset($_SESSION['flash']);
 
 // ワンタイムトークン生成
 $toke_byte = openssl_random_pseudo_bytes(16);
@@ -28,13 +28,13 @@ $_SESSION['csrf_token'] = $csrf_token;
     <form action="contact.php" method="POST">
         <div>
             <label for="name">お名前：</label>
-            <input type="text" id="name" name="name" required />
-            <?php echo isset($flush['name']) ? $flush['name'] : null ?>
+            <input type="text" id="name" name="name" value="<?php echo isset($_SESSION['_old_input']['name']) ? $_SESSION['_old_input']['name'] : null; ?>" required />
+            <?php echo isset($flash['name']) ? $flash['name'] : null ?>
         </div>
         <div>
             <label for="email">メールアドレス：</label>
             <input type="email" id="email" name="email" required />
-            <?php echo isset($flush['email']) ? $flush['email'] : null ?>
+            <?php echo isset($flash['email']) ? $flash['email'] : null ?>
         </div>
         <div>
             <label for="message">お問い合わせ本文</label>
