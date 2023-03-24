@@ -30,7 +30,7 @@ $_SESSION['csrf_token'] = $csrf_token;
 </head>
 
 <body>
-    <form action="contact.php" method="POST">
+    <form action="confirm.php" method="POST">
         <div>
             <label for="name">お名前：</label>
             <input type="text" id="name" name="name" value="<?php echo isset($original['name']) ? $original['name'] : null;?>" required />
