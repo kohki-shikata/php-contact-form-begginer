@@ -12,9 +12,14 @@ if(empty($_POST['name'])) {
   $_SESSION['flash']['name'] = 'お名前は必須項目です';
 }
 
+$_SESSION['original']['name'] = $_POST['name']; // nameに入力があった場合、一旦セッションに保存
+
 if(empty($_POST['email'])) {
   $_SESSION['flash']['email'] = 'メールアドレスは必須項目です';
 }
+
+$_SESSION['original']['email'] = $_POST['email']; // emailに入力があった場合、一旦セッションに保存
+$_SESSION['original']['message'] = $_POST['message']; // messageに入力があった場合、一旦セッションに保存
 
 // nameまたはemailのどちらかが入力されていなければ、index.phpへリダイレクト
 if(empty($_POST['name']) || empty($_POST['email'])) {
