@@ -35,12 +35,17 @@ $_SESSION['original']['message'] = $_POST['message']; // messageに入力があ�
   <p>以下の内容で間違いないですか？</p>
   <table>
     <tbody>
-      <?php foreach($_POST as $key => $value) { ?>
-        <tr>
-          <th><?php echo $key; ?></th>
-          <td><?php echo $value; ?></td>
-        </tr>
-      <?php }?>
+      <?php
+        unset($_POST['csrf_token']);
+        foreach($_POST as $key => $value) {
+          if($key !== 'labels') {
+            echo
+            "<tr>\n" . 
+              '<th>' . $_POST['labels'][$key] . "</th>\n" . 
+              '<td>' . $value . "</td>\n" . 
+            "</tr>\n";
+          }
+        }?>
     </tbody>
   </table>
 </body>

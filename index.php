@@ -30,24 +30,27 @@ $_SESSION['csrf_token'] = $csrf_token;
 </head>
 
 <body>
-    <form action="confirm.php" method="POST">
-        <div>
-            <label for="name">お名前：</label>
-            <input type="text" id="name" name="name" value="<?php echo isset($original['name']) ? $original['name'] : null;?>" required />
-            <?php echo isset($flash['name']) ? $flash['name'] : null ?>
-        </div>
-        <div>
-            <label for="email">メールアドレス：</label>
-            <input type="text" id="email" name="email" value="<?php echo isset($original['email']) ? $original['email'] : null;?>" required />
-            <?php echo isset($flash['email']) ? $flash['email'] : null ?>
-        </div>
-        <div>
-            <label for="message">お問い合わせ本文</label>
-            <textarea id="message" name="message"><?php echo isset($original['message']) ? $original['message'] : null;?></textarea>
-        </div>
-        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>" />
-        <button type="submit">送信</button>
-    </form>
+<form action="confirm.php" method="POST">
+    <div>
+        <label for="name">お名前：</label>
+        <input type="hidden" name="labels[name]" value="お名前" />
+        <input type="text" id="name" name="name" value="<?php echo isset($original['name']) ? $original['name'] : null;?>" required />
+        <?php echo isset($flash['name']) ? $flash['name'] : null ?>
+    </div>
+    <div>
+        <label for="email">メールアドレス：</label>
+        <input type="hidden" name="labels[email]" value="メールアドレス" />
+        <input type="text" id="email" name="email" value="<?php echo isset($original['email']) ? $original['email'] : null;?>" required />
+        <?php echo isset($flash['email']) ? $flash['email'] : null ?>
+    </div>
+    <div>
+        <label for="message">お問い合わせ本文</label>
+        <input type="hidden" name="labels[message]" value="お問い合わせ本文" />
+        <textarea id="message" name="message"><?php echo isset($original['message']) ? $original['message'] : null;?></textarea>
+    </div>
+    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>" />
+    <button type="submit">送信</button>
+</form>
 </body>
 
 </html>
